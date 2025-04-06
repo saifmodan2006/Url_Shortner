@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Enhanced QR Code Generator{% endblock %}
+{% block content %}
+<div class="card animate-pop">
+    <div class="card-body">
+        <h3 class="mb-4">Enhanced QR Code Generator</h3>
+        <form method="POST">
+            <div class="form-group">
+                <label for="url">URL</label>
+                <input type="url" name="url" class="form-control" required placeholder="Enter URL">
+            </div>
+            <div class="form-group">
+                <label for="fill_color">QR Code Fill Color</label>
+                <input type="text" name="fill_color" class="form-control" placeholder="e.g., black">
+            </div>
+            <div class="form-group">
+                <label for="back_color">QR Code Background Color</label>
+                <input type="text" name="back_color" class="form-control" placeholder="e.g., white">
+            </div>
+            <button type="submit" class="btn btn-primary">Generate QR Code</button>
+        </form>
+        {% if qr_code_data %}
+        <div class="text-center mt-4">
+            <h5>Your Customized QR Code</h5>
+            <div class="qr-code">
+                <img src="data:image/png;base64,{{ qr_code_data }}" alt="Customized QR Code" class="img-fluid">
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

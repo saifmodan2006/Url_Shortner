@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}URL Analytics{% endblock %}
+{% block content %}
+<div class="card animate-pop">
+    <div class="card-header">
+        <h4 class="mb-0">URL Statistics</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Short URL</th>
+                        <th>Original URL</th>
+                        <th>Clicks</th>
+                        <th>Created</th>
+                        <th>QR Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for url in urls %}
+                    <tr>
+                        <td>
+                            <a href="{{ request.host_url }}{{ url.short_code }}">
+                                {{ request.host_url }}{{ url.short_code }}
+                            </a>
+                        </td>
+                        <td class="text-truncate" style="max-width: 200px;">
+                            {{ url.original_url }}
+                        </td>
+                        <td>{{ url.clicks }}</td>
+                        <td>{{ url.created_at.strftime('%Y-%m-%d') }}</td>
+                        <td>
+                            <img src="data:image/png;base64,{{ url.qr_code }}" alt="QR Code" style="width: 50px;">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
